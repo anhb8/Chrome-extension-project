@@ -4,13 +4,17 @@
   <title>Pomodoro Timer</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="dashboard.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="dashboard">
+        <div class="right" id="settings">
+          <i class="fa fa-gear" style="font-size:30px"></i>
+        </div>
         <div id="timer"></div>
-        <button id="startButton">Power Up</button>
-        <button id="pauseButton">Pause</button>
-        <button id="resetButton">Reset</button>
+        <div class="center">
+            <button id="startButton">Power Up</button>
+        </div>
     </div>
 </body>
 </html>
