@@ -18,7 +18,12 @@
         },
         "default_popup": "dashboard.html"
     },
-    "permissions": ["activeTab"]
+    "permissions": ["activeTab"],
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["./src/dashboard.js"]
+        }
+      ]
 
-    
   }
