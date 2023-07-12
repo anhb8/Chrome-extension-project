@@ -14,7 +14,7 @@ code {
 }
 
 #root {
-    width: 300px;
+    min-width: 300px;
     min-height: 300px;
     padding: 20px;
     background: #F5E6E8

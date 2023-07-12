@@ -5,7 +5,6 @@ function ButtonList() {
     return (
         <ul className={classes.list}>
             <Button />
-            <Button />
         </ul>
     );
 }
