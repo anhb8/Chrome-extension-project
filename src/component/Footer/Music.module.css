@@ -1,0 +1,12 @@
+.music {
+  color: rgb(86, 4, 88);
+  font-size: x-large;
+}
+
+.music:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.music:active {
+  transform: scale(0.9, 0.9);
+}

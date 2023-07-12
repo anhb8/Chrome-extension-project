@@ -1,0 +1,12 @@
+.gear {
+  color: rgb(86, 4, 88);
+  font-size: large;
+}
+
+.gear:hover {
+  transform: rotate(75deg);
+}
+
+.gear:active {
+  transform: scale(0.9, 0.9);
+}

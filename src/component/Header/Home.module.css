@@ -1,0 +1,12 @@
+.home {
+  color: rgb(86, 4, 88);
+  font-size: large;
+}
+
+.home:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.home:active {
+  transform: scale(0.9, 0.9);
+}
