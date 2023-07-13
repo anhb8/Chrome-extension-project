@@ -1,8 +1,10 @@
 import classes from './Button.module.css';
 
-function Button() {
+
+function Button({name, onClick}) {
+    
     return (
-        <div className={classes.button}>Big Button</div>
+        <button className={classes.button} onClick={onClick}>{name}</button>
     );
 }
 
