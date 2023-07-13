@@ -1,23 +1,19 @@
 import Button from "./Button";
 import classes from "./ButtonList.module.css"
+import Character from "./Character";
 import React, { useState } from 'react';
 
-function ButtonList() {
-    const [showButton, setShowButton] = useState(false);
-    
-    const handleClick = evt => {
-        setShowButton(true);
-    };
+function ButtonList({onClickButton, state}) {
 
     return (
         <ul className={classes.list}>
-            {!showButton && (
-                <Button name="Power Up" onClick={handleClick}/>
-            )}
-            {showButton && (
+            {!state ? (
+                <Button name="Power Up" onClick={onClickButton} />
+            ) :
+             (
                 <div style={{ display: 'flex' }}>
-                <Button name="Block"/>
-                <Button name="Focus"/>
+                    <Button name="Block"/>
+                    <Button name="Focus"/>
                 </div>
             )}
         </ul>
