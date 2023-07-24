@@ -6,12 +6,12 @@ import classes from "./Character.module.css";
 function Character({ powerUpClicked}) {
   return (
     <div>
-      {powerUpClicked && (
-        <img src={Wakeup} alt="Wakeup pet" className={classes.character} />
-      )} 
-      {!powerUpClicked && (
+      {!powerUpClicked ? (
         <img src={Sleeping} alt="Sleeping pet" className={classes.character} />
+      ) :(
+        <img src={Wakeup} alt="Wakeup pet" className={classes.character} />
       )}
+      
     </div>
   );
 }
