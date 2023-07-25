@@ -12,18 +12,14 @@ function App() {
     setButtonClicked(true);
   };
 
-  //Home icon
-  const [homeClicked, setHomeClicked] = useState(false);
-
   const handleHomeClick = () => {
-      setHomeClicked(true);
       setButtonClicked(false); // Reset buttonClicked to false after clicking the home icon
   };
 
   return (
       <div className={classes.background}>
         <Header homeClicked={handleHomeClick} />
-        <Body homeClickedState={homeClicked} powerUpClicked={buttonClicked} onClickButton={handleClick} state={buttonClicked} />
+        <Body powerUpClicked={buttonClicked} onClickButton={handleClick} state={buttonClicked} />
         <Footer />
       </div>
   );

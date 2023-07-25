@@ -3,10 +3,9 @@ import classes from "./ButtonList.module.css";
 import Character from "./Character";
 import React, { useState } from "react";
 
-function ButtonList({ onClickButton, state, homeClickedState}) {
+function ButtonList({ onClickButton, state}) {
   return (
     <ul className={classes.list}>
-      
           {!state ? (
             <Button name="Power Up" onClick={onClickButton}/>
           ) : (

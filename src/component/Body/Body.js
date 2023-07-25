@@ -8,7 +8,7 @@ function Body({ homeClickedState, powerUpClicked, onClickButton, state}) {
   return (
     <div className={classes.body}>
       <Character powerUpClicked={powerUpClicked}/>
-      <ButtonList onClickButton={onClickButton} state={state} homeClickedState={homeClickedState} />
+      <ButtonList onClickButton={onClickButton} state={state}/>
     </div>
   );
 }
