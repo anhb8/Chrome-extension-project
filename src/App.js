@@ -5,18 +5,29 @@ import classes from "./App.module.css";
 import React, { useState } from "react";
 
 function App() {
-  const [homeClicked, setHomeClicked] = useState('');  //when home is clicked, useState sends value 'home' back to body
+  const [buttonName, setButtonName] = useState("");
+  const [focusButtonSticky, setFocusButtonSticky] = useState(false);
+  const [blockButtonSticky, setBlockButtonSticky] = useState(false);
+  const powerButtonSticky = false; //power button is never sticky
 
-  console.log(homeClicked);
-  
-  const handleHomeClicked = (identifier) => {
-    setHomeClicked(identifier);
-  }
+  const handleButtonBehavior = (identifier) => {
+    setButtonName(identifier); //identify which button was clicked on.
+
+    if (identifier === "Focus") {
+      setFocusButtonSticky(true);
+    }
+    if (identifier === "Block") {
+      setBlockButtonSticky(true);
+    }
+  };
 
   return (
       <div className={classes.background}>
-        <Header onHomeClick={(event) => handleHomeClicked(event.currentTarget.getAttribute('id'))} />
-        <Body goHome={homeClicked} />
+        <Header onHomeClick={(event) => handleButtonBehavior(event.currentTarget.getAttribute('id'))} />
+        <Body
+          onClickButton={(event) => handleButtonBehavior(event.target.innerText)}
+          activeButton={buttonName}
+          sticky={{block: blockButtonSticky, focus: focusButtonSticky, power: powerButtonSticky}} />
         <Footer />
       </div>
   );
