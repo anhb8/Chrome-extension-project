@@ -6,7 +6,7 @@ import classes from "./Header.module.css"
 function Header({onHomeClick}) {
   return (
       <div className={classes.navbar}>
-        <Home onClick={onHomeClick} />
+        <Home onHomeClick={onHomeClick} />
         <Title />
         <Settings />
       </div>

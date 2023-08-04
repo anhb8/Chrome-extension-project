@@ -5,17 +5,17 @@ import classes from "./App.module.css";
 import React, { useState } from "react";
 
 function App() {
-  const [homeClicked, setHomeClicked] = useState(false);
+  const [homeClicked, setHomeClicked] = useState('');  //when home is clicked, useState sends value 'home' back to body
 
   console.log(homeClicked);
   
-  const handleHomeClicked = () => {
-    setHomeClicked(true);
+  const handleHomeClicked = (identifier) => {
+    setHomeClicked(identifier);
   }
 
   return (
       <div className={classes.background}>
-        <Header onHomeClick={handleHomeClicked} />
+        <Header onHomeClick={(event) => handleHomeClicked(event.currentTarget.getAttribute('id'))} />
         <Body goHome={homeClicked} />
         <Footer />
       </div>
