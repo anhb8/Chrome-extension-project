@@ -3,12 +3,31 @@ import Character from "./Character";
 import ButtonList from "./ButtonList";
 import React, { useState } from "react";
 
-function Body({ homeClickedState, powerUpClicked, onClickButton, state}) {
+function Body({goHome}) {
+  const [buttonName, setButtonName] = useState("");
+  const [focusButtonSticky, setFocusButtonSticky] = useState(false);
+  const [blockButtonSticky, setBlockButtonSticky] = useState(false);
+  const powerButtonSticky = false; //power button is never sticky
+
+  const handleButtonBehavior = (identifier) => {
+    setButtonName(identifier); //identify which button was clicked on.
+
+    if (identifier === "Focus") {
+      setFocusButtonSticky(true);
+    }
+    if (identifier === "Block") {
+      setBlockButtonSticky(true);
+    }
+  };
 
   return (
     <div className={classes.body}>
-      <Character powerUpClicked={powerUpClicked}/>
-      <ButtonList onClickButton={onClickButton} state={state}/>
+      <Character bodyButtonClicked={buttonName} headerButtonClicked={goHome} />
+      <ButtonList
+        onClickButton={(event) => handleButtonBehavior(event.target.innerText)}
+        activeButton={buttonName}
+        sticky={{block: blockButtonSticky, focus: focusButtonSticky, power: powerButtonSticky}}
+      />
     </div>
   );
 }

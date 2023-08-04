@@ -3,10 +3,10 @@ import Settings from "./Settings";
 import Title from "./Title";
 import classes from "./Header.module.css"
 
-function Header({homeClicked}) {
+function Header({onHomeClick}) {
   return (
       <div className={classes.navbar}>
-        <Home homeClicked={homeClicked}/>
+        <Home onClick={onHomeClick} />
         <Title />
         <Settings />
       </div>

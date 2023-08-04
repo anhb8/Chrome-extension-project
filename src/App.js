@@ -2,24 +2,21 @@ import Header from "./component/Header/Header";
 import Body from "./component/Body/Body";
 import Footer from "./component/Footer/Footer";
 import classes from "./App.module.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function App() {
-  //Power Up button
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [homeClicked, setHomeClicked] = useState(false);
 
-  const handleClick = () => {
-    setButtonClicked(true);
-  };
-
-  const handleHomeClick = () => {
-      setButtonClicked(false); // Reset buttonClicked to false after clicking the home icon
-  };
+  console.log(homeClicked);
+  
+  const handleHomeClicked = () => {
+    setHomeClicked(true);
+  }
 
   return (
       <div className={classes.background}>
-        <Header homeClicked={handleHomeClick} />
-        <Body powerUpClicked={buttonClicked} onClickButton={handleClick} state={buttonClicked} />
+        <Header onHomeClick={handleHomeClicked} />
+        <Body goHome={homeClicked} />
         <Footer />
       </div>
   );
