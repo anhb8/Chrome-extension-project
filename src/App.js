@@ -13,11 +13,15 @@ function App() {
   const handleButtonBehavior = (identifier) => {
     setButtonName(identifier); //identify which button was clicked on.
 
-    if (identifier === "Focus") {
-      setFocusButtonSticky(true);
+    if (identifier === "Focus") { //in future version, will set condition to block user from unsticky
+      focusButtonSticky === false ? setFocusButtonSticky(true) : setFocusButtonSticky(false);
     }
-    if (identifier === "Block") {
-      setBlockButtonSticky(true);
+    if (identifier === "Block") { //in future version, will set condition to block user from unsticky
+      blockButtonSticky === false ? setBlockButtonSticky(true) : setBlockButtonSticky(false);
+    }
+    if (identifier === "Home") {
+      setBlockButtonSticky(false);
+      setFocusButtonSticky(false);
     }
   };
 
