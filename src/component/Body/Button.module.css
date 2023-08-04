@@ -32,3 +32,29 @@
     box-shadow: 0 0 #000000;
     transform: translateY(4px);
   }
+
+  /* Sticky button state, once pressed button stays down until deactivated */
+  .stickybutton {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    margin: 6px;
+    box-sizing: border-box;
+    border: none;
+
+    height: 50px;
+
+    background: #95608b;
+    box-shadow: 0 0 #000000;
+    border-radius: 20px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    color: #f1e4e4;
+
+    transform: translateY(4px);
+  }
