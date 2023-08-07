@@ -8,7 +8,7 @@ function Body({ onClickButton, activeButton, sticky }) {
   return (
     <div className={classes.body}>
       {activeButton === "Focus" ? (
-        <ClockFace duration={10} />
+        <ClockFace duration={31} />
       ) : (
         <Character
           bodyButtonClicked={activeButton}

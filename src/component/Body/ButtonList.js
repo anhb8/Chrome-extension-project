@@ -7,7 +7,6 @@ function ButtonList({onClickButton, activeButton, sticky}) {
 
     let buttons = '';
 
-    console.log(activeButton);
     if (activeButton === "Power Up" || activeButton === "Block" || activeButton === "Focus") {
         buttons = (
             <>

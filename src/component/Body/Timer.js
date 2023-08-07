@@ -19,7 +19,7 @@ class Timer extends React.Component {
                     {count: prev.count + 1}
                 )
             )
-            if (this.state.count == this.props.duration) {
+            if (this.state.count == this.props.duration - 1) {
                 clearInterval(timer)
             }
         }, 1000)
