@@ -15,6 +15,14 @@ function Clock ({count, duration}) {
                 style={{transform:'rotate(' + degrees + 'deg)'}}
             ></div>
             <div className={secondHalf}></div>
+            <div className={[classes.tick, classes.deg0].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg45].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg90].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg135].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg180].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg225].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg270].join(' ')} ></div>
+            <div className={[classes.tick, classes.deg315].join(' ')} ></div>
         </div>
     )
 }
