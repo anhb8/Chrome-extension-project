@@ -21,5 +21,22 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["activeTab"]
+  "content_scripts": [
+    {
+      "matches" : ["<all_urls>"],
+      "js" : ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["SettingsTab.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": [ "activeTab", 
+                  "storage",
+                  "tabs",
+                  "scripting"
+  ],
+  "host_permissions": ["<all_urls>"]
 }
