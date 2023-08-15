@@ -5,6 +5,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.tabs.create({ url });
     }
 
+    chrome.tabs.onActivated.addListener(() => {
+      console.log("Tabs switched");
+      sendContentScriptMessage();
+    });
+
     if (message.type === 'updateUrls') {
       console.log('message received - background.js');
       chrome.storage.local.get(['urlList'], result => {
@@ -12,27 +17,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         console.log(urlList);
       });
 
-      // Re-inject content script after update 
-      chrome.runtime.onInstalled.addListener(async () => {
-        for (const cs of chrome.runtime.getManifest().content_scripts) {
-          for (const tab of await chrome.tabs.query({url: cs.matches})) {
-            chrome.scripting.executeScript({
-              target: {tabId: tab.id},
-              files: content.js,
-            });
-          }
-        }
-      });
+      sendContentScriptMessage();
     }
 
 });
 
+// Re-inject content script after update 
 function sendContentScriptMessage() {
-  console.log("Sending message to content.js");
-  chrome.runtime.sendMessage({ type: "showAlert" });
+  chrome.runtime.onInstalled.addListener(async () => {
+    for (const cs of chrome.runtime.getManifest().content_scripts) {
+      for (const tab of await chrome.tabs.query({active: true, currentWindow: true, url: cs.matches})) {
+        chrome.scripting.executeScript({
+          target: {tabId: tab.id},
+          files: content.js,
+        });
+      }
+    }
+  });
 }
 
-
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  chrome.tabs.get(activeInfo.tabId, (tab) => {
+    if (tab.status === 'complete') {
+      sendContentScriptMessage();
+    }
+  });
+});
 /*
 console.log("background.js loaded");
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

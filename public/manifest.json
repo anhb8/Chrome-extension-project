@@ -29,7 +29,9 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["SettingsTab.js"],
+      "resources": ["SettingsTab.js",
+      "injected/nr-ext-reading-bar/nr-ext-reading-bar.css"
+    ],
       "matches": ["<all_urls>"]
     }
   ],

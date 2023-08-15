@@ -11,7 +11,7 @@ document.getElementById("submit").onclick = function() {
   updateDisplay();
   document.getElementById("urls").value = '';
 
-   chrome.storage.local.set({ urlList }, () => {
+  chrome.storage.local.set({ urlList }, () => {
     chrome.runtime.sendMessage({ type: "updateUrls" });
   });
 }
