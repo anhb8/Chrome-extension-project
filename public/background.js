@@ -1,4 +1,6 @@
 console.log("background.js loaded");
+let blockingEnabled = false;
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'openSettings') {
       const url = chrome.runtime.getURL('settings.html');
@@ -7,7 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     chrome.tabs.onActivated.addListener(() => {
       console.log("Tabs switched");
-      sendContentScriptMessage();
+      //sendContentScriptMessage();
     });
 
     if (message.type === 'updateUrls') {
@@ -16,10 +18,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const urlList = result.urlList || [];
         console.log(urlList);
       });
-
-      sendContentScriptMessage();
     }
 
+    if (message.action === 'activateBlock') {
+      console.log("Block feature is activated -background script");
+      blockingEnabled = !blockingEnabled;
+      chrome.storage.local.set({ blockingEnabled });
+      
+    }
+
+});
+
+chrome.storage.local.get(['blockingEnabled'], (result) => {
+  blockingEnabled = result.blockingEnabled || false;
 });
 
 // Re-inject content script after update 
@@ -36,13 +47,14 @@ function sendContentScriptMessage() {
   });
 }
 
-chrome.tabs.onActivated.addListener((activeInfo) => {
-  chrome.tabs.get(activeInfo.tabId, (tab) => {
-    if (tab.status === 'complete') {
-      sendContentScriptMessage();
-    }
-  });
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (blockingEnabled && changeInfo.status === 'complete') {
+    console.log("Calling content script");
+    sendContentScriptMessage();
+  }
 });
+
 /*
 console.log("background.js loaded");
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
