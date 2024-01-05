@@ -6,7 +6,7 @@ import React, { useState } from "react";
 function ButtonList({onClickButton, activeButton, sticky}) {
 
     let buttons = '';
-
+    
     if (activeButton === "Power Up" || activeButton === "Block" || activeButton === "Focus") {
         buttons = (
             <>

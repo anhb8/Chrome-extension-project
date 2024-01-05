@@ -31,8 +31,3 @@ chrome.storage.local.get(["urlList"], (result) => {
   updateDisplay();
 });
 
-/*
-// Verify internal URL
-function isInternalExtensionUrl(url) {
-  return url.startsWith('chrome-extension://') || url.startsWith('chrome://');
-}*/

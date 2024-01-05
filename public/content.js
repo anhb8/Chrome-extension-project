@@ -248,24 +248,41 @@ const generateHTML = (pageName) => {
       <div class='_404'>404</div>
       <hr>
       <div class='_1'>GET BACK TO WORK</div>
-      <div class='_2'>STUDYING > ${pageName}</div>
+      <div class='_2'> > ${pageName}</div>
   </div>
    `;
 };
 
-
-function checkUrlList() {
-  chrome.storage.local.get(['urlList'], result => {
-    const urlList = result.urlList || [];
-    const currentHostname = window.location.hostname;
-    const shortCurrentHostname = currentHostname.replace(/^www\./, '');
-
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  console.log('message received - content.js');
+  if (message.action === 'enableBlock') {
+    console.log("Enable block");
+    chrome.storage.local.get(['urlList'], result => {
+      const urlList = result.urlList || [];
+      const currentHostname = window.location.hostname;
+      const shortCurrentHostname = currentHostname.replace(/^www\./, '');
+      console.log("URL of the active tab:", currentHostname);
+      console.log("Blocked URL list: ", urlList);
     if (urlList.includes(currentHostname) || urlList.includes(shortCurrentHostname)) {
+      var styleElement = document.createElement('style');
+      styleElement.setAttribute('data-dynamic-styles', '');
+      document.head.appendChild(styleElement);
       document.head.innerHTML = generateSTYLES();
       document.body.innerHTML = generateHTML(currentHostname);
     }
-  });
-} 
     
-checkUrlList();
+    });
+  
+  }
+
+  if (message.action === 'disableBlock') {
+    console.log("Disable block");
+    var styleElement = document.querySelector('[data-dynamic-styles]');
+    if (styleElement) {
+      console.log("Removing style");
+      styleElement.remove();
+    }
+  }
+});
+
 
