@@ -1,4 +1,18 @@
 console.log("background.js loaded");
+let blockActivated = false;
+
+function checkBlockActivated () {
+  if (blockActivated === true) {
+    console.log("Block feature is activated -background script");
+    enableBlock();
+   }
+ 
+   else {
+    console.log("Block feature is deactivated -background script");
+    disableBlock();
+   }
+}
+
 function enableBlock() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var activeTab = tabs[0];
@@ -25,26 +39,55 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.tabs.create({ url });
     }
 
-    if (message.type === 'updateUrls') {
+    // if (message.type === 'updateBlackListUrls') {
+    //   console.log('message received - background.js');
+    //   chrome.storage.local.get(['urlBlackList'], result => {
+    //     const urlBlackList = result.urlBlackList || [];
+    //     console.log(urlBlackList);
+    //   });
+    // }
+
+    if (message.type === 'updateWhiteListUrls') {
       console.log('message received - background.js');
-      chrome.storage.local.get(['urlList'], result => {
-        const urlList = result.urlList || [];
-        console.log(urlList);
+      chrome.storage.local.get(['urlWhiteList'], result => {
+        const urlWhiteList = result.urlWhiteList || [];
+        console.log(urlWhiteList);
       });
     }
 
     if (message.action === 'activateBlock') {
+      const blockButtonStickyValue = message.blockButtonSticky;
+      blockActivated = blockButtonStickyValue; 
       console.log("Block feature is activated -background script");
       enableBlock();
     }
 
     if (message.action === 'deactivateBlock') {
-      
+      const blockButtonStickyValue = message.blockButtonSticky;
+      blockActivated = blockButtonStickyValue; 
       console.log("Block feature is deactivated -background script");
       disableBlock();
       
     }
     
     
-     });
-      
+});
+
+chrome.action.onClicked.addListener(function(tab) {
+  console.log("Value of blockActivated: ", blockActivated);
+  console.log("Extension is clicked");
+  checkBlockActivated();
+
+  });
+
+ chrome.tabs.onActivated.addListener(function(tab) {
+  console.log("Value of blockActivated: ", blockActivated);
+  
+  console.log("Tab is switched");
+  checkBlockActivated();
+});
+
+chrome.runtime.onInstalled.addListener(function() {
+  console.log("Value of blockActivated: ", blockActivated);
+  checkBlockActivated();
+});

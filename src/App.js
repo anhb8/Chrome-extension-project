@@ -49,13 +49,13 @@ function App() {
 
   if (blockButtonSticky === true) {
     console.log("The current value of block button sticky is before sending messeage", blockButtonSticky);
-    chrome.runtime.sendMessage({ action: 'activateBlock'});
+    chrome.runtime.sendMessage({ blockButtonSticky: blockButtonSticky, action: 'activateBlock'});
     console.log("Send activateBlock message to background script...");
   }
 
   if (blockButtonSticky === false) {
     console.log("The current value of block button sticky is before sending messeage", blockButtonSticky);
-    chrome.runtime.sendMessage({ action: 'deactivateBlock'});
+    chrome.runtime.sendMessage({ blockButtonSticky: blockButtonSticky, action: 'deactivateBlock'});
     console.log("Send deactivateBlock message to background script...");
   }
 

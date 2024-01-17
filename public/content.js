@@ -257,13 +257,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('message received - content.js');
   if (message.action === 'enableBlock') {
     console.log("Enable block");
-    chrome.storage.local.get(['urlList'], result => {
-      const urlList = result.urlList || [];
+    chrome.storage.local.get(['urlWhiteList'], result => {
+      const urlWhiteList = result.urlWhiteList || [];
       const currentHostname = window.location.hostname;
       const shortCurrentHostname = currentHostname.replace(/^www\./, '');
       console.log("URL of the active tab:", currentHostname);
-      console.log("Blocked URL list: ", urlList);
-    if (urlList.includes(currentHostname) || urlList.includes(shortCurrentHostname)) {
+      console.log("Allowed URL list: ", urlWhiteList);
+    if (!urlWhiteList.includes(currentHostname) && !urlWhiteList.includes(shortCurrentHostname)) {
+      console.log("Access Denied. Website not in the allowed list.");
       var styleElement = document.createElement('style');
       styleElement.setAttribute('data-dynamic-styles', '');
       document.head.appendChild(styleElement);
