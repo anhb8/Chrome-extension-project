@@ -97,15 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   }
 
-  var tooltip = document.getElementById('tooltip');
-    tooltip.addEventListener('mouseover', function() {
-      tooltip.style.opacity = '1';
-    });
-
-    tooltip.addEventListener('mouseout', function() {
-      tooltip.style.opacity = '0';
-    });
-
+  
   // Gif image
 //   var pandaGif = document.getElementById('pandaGif');
 //   var order = 0;

@@ -28,7 +28,9 @@
   "web_accessible_resources": [
     {
       "resources": ["SettingsTab.js",
-      "injected/nr-ext-reading-bar/nr-ext-reading-bar.css"
+      "injected/nr-ext-reading-bar/nr-ext-reading-bar.css",
+      "callback.js",
+      "callback.html"
     ],
       "matches": ["<all_urls>"]
     }
@@ -36,10 +38,23 @@
   "permissions": [ "activeTab", 
                   "storage",
                   "tabs",
-                  "scripting"
+                  "scripting",
+                  "identity"
   ],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["<all_urls>",
+    "https://api.spotify.com/*",
+    "https://open.spotify.com/*"
+  ],
+  "oauth2": {
+    "client_id": "617a2f3dd5e74cab8eb565dd84e4bda1",
+    "scopes": ["user-read-private", "user-read-email", "user-read-playback-state", "user-modify-playback-state"],
+    "redirect_uri": "chrome-extension://olohhkoeiaingedfoafpppfjcpanjkmk/callback.html",
+    "authorization_url": "https://accounts.spotify.com/authorize",
+    "token_url": "https://accounts.spotify.com/api/token",
+    "response_type": "code"
+    
+  },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
-  } 
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.spotify.com/*"
+  }
 }

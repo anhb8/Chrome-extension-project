@@ -253,9 +253,12 @@ const generateHTML = (pageName) => {
    `;
 };
 
+  
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('message received - content.js');
   if (message.action === 'enableBlock') {
+    console.log('Before appending script to body');
+    spotify();
     console.log("Enable block");
     chrome.storage.local.get(['urlWhiteList'], result => {
       const urlWhiteList = result.urlWhiteList || [];
@@ -263,6 +266,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       const shortCurrentHostname = currentHostname.replace(/^www\./, '');
       console.log("URL of the active tab:", currentHostname);
       console.log("Allowed URL list: ", urlWhiteList);
+
     if (!urlWhiteList.includes(currentHostname) && !urlWhiteList.includes(shortCurrentHostname)) {
       console.log("Access Denied. Website not in the allowed list.");
       var styleElement = document.createElement('style');
