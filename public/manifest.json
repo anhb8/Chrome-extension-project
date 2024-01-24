@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Focus Mode",
+  "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
+  "version": "1.0",
+  "icons": {
+    "16": "/images/icon16.png",
+    "48": "/images/icon48.png",
+    "128": "/images/icon128.png"
+  }, 
+  "action": {
+    "default_icon": { 
+        "16": "/images/icon16.png",
+        "48": "/images/icon48.png",
+        "128": "/images/icon128.png"       
+    },
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches" : ["<all_urls>"],
+      "js" : ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["SettingsTab.js",
+      "injected/nr-ext-reading-bar/nr-ext-reading-bar.css",
+      "callback.js",
+      "callback.html"
+    ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": [ "activeTab", 
+                  "storage",
+                  "tabs",
+                  "scripting",
+                  "identity"
+  ],
+  "host_permissions": ["<all_urls>",
+    "https://api.spotify.com/*",
+    "https://open.spotify.com/*"
+  ],
+  "oauth2": {
+    "client_id": "617a2f3dd5e74cab8eb565dd84e4bda1",
+    "scopes": ["user-read-private", "user-read-email", "user-read-playback-state", "user-modify-playback-state"],
+    "redirect_uri": "chrome-extension://olohhkoeiaingedfoafpppfjcpanjkmk/callback.html",
+    "authorization_url": "https://accounts.spotify.com/authorize",
+    "token_url": "https://accounts.spotify.com/api/token",
+    "response_type": "code"
+    
+  },
+  "content_security_policy": {
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.spotify.com/*"
+  }
+}

@@ -1,0 +1,6 @@
+.list {
+    display: flex;
+    align-items: center;
+    padding: 2% 1%;
+    /* background-color: rgb(195, 244, 243); */
+}
