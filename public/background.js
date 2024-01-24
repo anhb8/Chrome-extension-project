@@ -31,7 +31,8 @@ function disableBlock() {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "SPOTIFY_AUTH_RESPONSE") {
-    chrome.storage.sync.set({ accessToken: message.accessToken });
+    console.log("Receive message from callback.js");
+    chrome.storage.sync.set({ accessToken: message.accessToken, expiresIn: message.expiresIn, refreshToken: message.refreshToken });
   }
 
   if (message.action === "openSettings") {
