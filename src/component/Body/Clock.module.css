@@ -8,6 +8,26 @@
     border: 1px solid #000000;
 }
 
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  color: #fff;  /* Text color */
+  padding: 10px; /* Add padding for better readability */
+  border-radius: 5px; /* Round the corners */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;/* Choose a suitable font-family */
+  font-size: 18px; /* Adjust font size */
+  font-weight: 500;
+  transition: opacity 0.3s; /* Add a smooth transition effect */
+}
+
+.clock:hover .tooltip {
+  visibility: visible;
+  opacity: 1; 
+}
+
 .rotator {
     position: absolute;
     height: 100%;

@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Focus Mode",
-    "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
+    "name": "ZenPomo",
+    "description": "Transform your browsing experience with ZenPomo! Boost productivity, stay focused, and enhance your work environment. This all-in-one extension brings powerful features right to your browser, including a Spotify Mini Web Player.",
     "version": "1.0",
     "icons": {
       "16": "/images/icon16.png",

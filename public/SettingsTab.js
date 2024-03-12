@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
   function openTab(tabName) {
-    console.log('Tab clicked:', tabName);
     var tabs = document.getElementsByClassName('tab-content');
     for (var i = 0; i < tabs.length; i++) {
         tabs[i].style.display = 'none';
@@ -97,7 +96,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   }
 
-  
+  // Timer settings
+  const storedTimerDuration = localStorage.getItem('timerDuration');
+  const storedBreakDuration = localStorage.getItem('breakDuration');
+
+  const timerDurationInput = document.getElementById('timer-duration');
+  const breakDurationInput = document.getElementById('break-duration');
+
+  timerDurationInput.value = storedTimerDuration || 45;
+  breakDurationInput.value = storedBreakDuration || 5;
+
+  const saveSettingsButton = document.getElementById('save-settings');
+  saveSettingsButton.addEventListener('click', function () {
+      const timerDuration = timerDurationInput.value;
+      const breakDuration = breakDurationInput.value;
+
+      localStorage.setItem('timerDuration', timerDuration);
+      localStorage.setItem('breakDuration', breakDuration);
+
+      chrome.storage.sync.set({ defaultTimerDuration: timerDuration }, function () {
+          // console.log('Default timer duration updated:', timerDuration);
+      });
+  });
+
   // Gif image
 //   var pandaGif = document.getElementById('pandaGif');
 //   var order = 0;

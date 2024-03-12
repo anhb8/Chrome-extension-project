@@ -4,7 +4,7 @@ function Button({ name, onClick, setSticky }) {
   return (
     <>
       {setSticky ? (
-        <button className={classes.stickybutton} onClick={onClick}>
+        <button className={classes.stickybutton} onClick={onClick} >
           {name}
         </button>
       ) : (

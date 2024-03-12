@@ -22,7 +22,37 @@
     
     <!-- About Tab -->
     <div id="about" class="tab-content">
-        <p>This is the About tab content.</p>
+        <h2>About ZenPomo </h2>
+    
+    <!-- Overview -->
+    <p>
+        ZenPomo is a productivity extension designed to enhance your work or study sessions with a combination of time management and music. It integrates a Pomodoro timer technique with a compact Spotify mini web player, creating an immersive and focused work environment.
+    </p>
+
+    <!-- Features -->
+    <h3>Features</h3>
+    <ul>
+        <li><strong>Pomodoro Timer:</strong> Utilize the Pomodoro technique to boost your productivity. Set work intervals, take short breaks, and stay on track with your tasks.</li>
+        <li><strong>Block Feature:</strong> Enhance your productivity by blocking distracting websites or apps during your work sessions. Stay focused on your tasks without interruptions.</li>
+        <li><strong>Spotify Mini Web Player:</strong> Enjoy your favorite music from Spotify without leaving your work environment. Control playback, change tracks, and set the perfect soundtrack for your focused sessions.</li>
+    </ul>
+
+    <!-- Version Information -->
+    <p><strong>Current Version:</strong> 1.0</p>
+
+    <!-- Creators/Developers -->
+    <h3>Creators/Developers</h3>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/alinanguyen" target="_blank">Alina Nguyen</a></li>
+    </ul>
+
+    <!-- Contact Information -->
+    <!-- <h3>Contact Information</h3>
+    <p>
+        Have questions or suggestions? We'd love to hear from you! Contact us at [Your Email Address] or join the conversation on [Social Media Links].
+    </p> -->
+
+
     </div>
 
     <!-- Block Tab -->
@@ -54,16 +84,28 @@
                 
             </div>
             <!-- GIF Container -->
-            <div class="gif-container" id="gifContainer" tabindex="0" style="cursor: pointer;">
+            <!-- <div class="gif-container" id="gifContainer" tabindex="0" style="cursor: pointer;">
                 <img id="gif" src="./robot.gif" alt="GIF">
-            </div>
+            </div> -->
         </div>
     </div>
 
     <!-- Timer Tab -->
     <div id="timer" class="tab-content">
-        <h2>Timer Settings</h2>
-        Add timer settings here 
+        <div class="flex-container">
+            <div class="section">
+        <h2>Timer</h2>
+    
+        <label for="timer-duration">Timer Duration (minutes):</label>
+        <input type="number" id="timer-duration" min="1" step="1" value="45">
+    
+        <label for="break-duration">Break Duration (minutes):</label>
+        <input type="number" id="break-duration" min="1" step="1" value="5">
+    
+        <button id="save-settings">Save Settings</button>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 

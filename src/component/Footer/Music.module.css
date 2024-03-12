@@ -30,6 +30,10 @@
   width: 5px;
   border-radius: 50px;
   margin: 0 5px;
+  margin-top: 10px;
+}
+
+.wave.activeWave {
   animation: animate 1.2s linear infinite;
 }
 
@@ -41,7 +45,7 @@
     height: 100%;
   }
 }
-  
+
 .wave:nth-child(1){
   animation-delay: 0s;
 }

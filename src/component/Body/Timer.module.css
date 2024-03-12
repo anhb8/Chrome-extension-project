@@ -1,0 +1,91 @@
+.timerControl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+  }
+  
+  .timerButton {
+  font-size: 26px;
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 10px; 
+  background-color: #EAD5E6; 
+  color: #B39494; 
+  border: none; 
+  border-radius: 5px; 
+  transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .timerButton:hover {
+    background-color: #95608b; 
+    color: #B39494;
+  }
+  
+  .timerNumber {
+    font-size: 36px;
+    text-align: center;
+    width: 60px;
+    margin: 10px 20px;
+  }
+  
+  .startContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .timerStartButton {
+    margin-top: 15px;
+    font-size: 14px; 
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 1000;
+    line-height: 1.5;
+    color: #B39494;
+    background-color: #EAD5E6;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .timerStartButton:hover {
+    background-color: #b31c1c; 
+    color: #ffffff; 
+  }
+  
+  .timerEndButton {
+    margin-top: 15px;
+    font-size: 14px; 
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 1000;
+    line-height: 1.5;
+    color: #B39494;
+    background-color: #EAD5E6;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .timerEndButton:hover {
+    background-color: #b31c1c; 
+    color: #ffffff; 
+  }
+
+  .endContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .character {
+    display: block;
+    align-items: center;
+    max-width: 70%;
+    padding-left: 15%;
+    padding-right: 15%;
+}

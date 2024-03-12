@@ -9,7 +9,7 @@ import { useAsyncError } from "react-router";
 
 const clientId = "617a2f3dd5e74cab8eb565dd84e4bda1";
 const clientSecret = "afe45c28f4c94688bbb934c3e218d604";
-const redirectUri ="chrome-extension://olohhkoeiaingedfoafpppfjcpanjkmk/callback.html";
+const redirectUri ="chrome-extension://hppoepccpbammgcaggmfffapnpneannj/callback.html";
 const loggedInState = window.localStorage.getItem('SPOTIFY');
 const isPlayingState = window.localStorage.getItem('PLAYING');
 
@@ -46,7 +46,7 @@ function Music() {
       .catch((error) => {
         window.localStorage.setItem('PLAYING', JSON.stringify(false));
         window.localStorage.setItem('SPOTIFY', JSON.stringify(false));
-        console.error("Error getting currently playing track:", error);
+        //console.error("Error getting currently playing track:", error);
         throw error;
       });
   };
@@ -81,14 +81,12 @@ function Music() {
             },
             })
             .then(response => {
-                console.log(`Playback command '${command}' successful:`, response.data);
-                //fetchPlaybackStatus(accessToken);
               })
               .catch(error => {
                 if (error.response && error.response.status === 401) {
-                  console.error('Unauthorized request. Access token may be expired or invalid.');
+                  //console.error('Unauthorized request. Access token may be expired or invalid.');
                 } else {
-                  console.error(`Error sending playback command '${command}':`, error);
+                  //console.error(`Error sending playback command '${command}':`, error);
                 }
               });
         } else {
@@ -98,20 +96,19 @@ function Music() {
                 },
                 })
                 .then(response => {
-                    console.log(`Playback command '${command}' successful:`, response.data);
-                    //fetchPlaybackStatus(accessToken);
+                    //console.log(`Playback command '${command}' successful:`, response.data);
                   })
                   .catch(error => {
                     if (error.response && error.response.status === 401) {
-                      console.error('Unauthorized request. Access token may be expired or invalid.');
+                      //console.error('Unauthorized request. Access token may be expired or invalid.');
                     } else {
-                      console.error(`Error sending playback command '${command}':`, error);
+                      //console.error(`Error sending playback command '${command}':`, error);
                     }
                   });
         }  
        
       } else {
-        console.error('Access token not found in Chrome storage. User may not be logged in.');
+        //console.error('Access token not found in Chrome storage. User may not be logged in.');
       }
     });
   };
@@ -135,7 +132,7 @@ function Music() {
       return newAccessToken;
 
     } catch (error) {
-      console.error('Error refreshing access token:', error);
+    //console.error('Error refreshing access token:', error);
       throw error;
     }
   };
@@ -147,7 +144,7 @@ function Music() {
             const newAccessToken = refreshAccessToken(refreshToken);
         });
     } catch (error) {
-      console.error('Error refreshing token or re-authenticating:', error);
+      //console.error('Error refreshing token or re-authenticating:', error);
       
     }
   };
@@ -156,16 +153,13 @@ function Music() {
     const initialloggedInState = window.localStorage.getItem('SPOTIFY');
     const initialisPlayingState = window.localStorage.getItem('PLAYING');
     setIsLoggedIn(JSON.parse(initialloggedInState));
-    //setIsPlaying(JSON.parse(initialisPlayingState ));
-    console.log("isPlaying initially: ", initialisPlayingState);
     chrome.storage.sync.get(["accessToken", "expiresIn"], (result) => {
         if (chrome.runtime.lastError) {
-            console.error('Error retrieving data:', chrome.runtime.lastError);
+            //console.error('Error retrieving data:', chrome.runtime.lastError);
           } else {
-            console.log("Result: ", result);
             const { accessToken, expiresIn } = result;
-            console.log('Access Token:', accessToken);
-            console.log('Expires In:', expiresIn);
+            // console.log('Access Token:', accessToken);
+            // console.log('Expires In:', expiresIn);
           
             const expirationTimestamp = Date.now() + expiresIn * 1000; 
             // Check if the access token is still valid
@@ -177,33 +171,31 @@ function Music() {
                   window.localStorage.setItem('SPOTIFY', JSON.stringify(true));
                   setAccessToken(accessToken);
                   //setIsLoggedIn(true);
-                  console.log("Access token is valid until:", new Date(expirationTimestamp));
+          
 
                 } else {
                   // Token has expired
                   window.localStorage.setItem('SPOTIFY', JSON.stringify(false));
-                  console.log("Token has expired");
+                
                   setIsLoggedIn(false);
                   refreshTokenOrReauthenticate();
                  
                 }
               } else {
-                console.log("Access token or expiration information is missing");
+                //console.log("Access token or expiration information is missing");
               }
             
     const fetchCurrentTrackandStatus = () => {
         getCurrentTrack(accessToken)
           .then((currentTrack) => {
             if (currentTrack) {
-              console.log("Currently Playing Track:", currentTrack);
+              //console.log("Currently Playing Track:", currentTrack);
               setCurrentSong(currentTrack);
-            //   setIsPlaying(JSON.parse(isPlayingState));
-            //   console.log("Currently Track Status:", isPlaying);
-              document.getElementById('currentTrackName').innerText = currentTrack.item.name;
+              document.getElementById('currentTrackName').innerText =  `${currentTrack.item.name} by ${currentTrack.item.artists[0].name}`;
             }
           })
           .catch((error) => {
-            console.error('Error fetching current track:', error);
+            //('Error fetching current track:', error);
           });
       };
 
@@ -229,37 +221,28 @@ function Music() {
   
 
 const handleLoginButton = () => {
-    console.log('Send Log in command');
     redirectToSpotifyLogin();
 }
 
 const handleNextButtonClick = () => {
-      console.log('Send NEXT command');
       sendPlaybackCommand('next');
       setIsPlaying(true);
 };
 
 const handlePreviousButtonClick = () => {
-    console.log('Send PREVIOUS command');
     sendPlaybackCommand('previous');
     setIsPlaying(true);
 };
 
 const handlePauseButtonClick = () => {
-    console.log('Send PAUSE command');
     sendPlaybackCommand('pause');
     window.localStorage.setItem('PLAYING', JSON.stringify(false));
-    //setIsPlaying(false);
-    console.log("Current isPlaying value :", isPlaying );
 };
 
 const handlePlayButtonClick = () => {
-    console.log('Send PLAY command');
-    //openSpotifyTab();
     sendPlaybackCommand('play');
     window.localStorage.setItem('PLAYING', JSON.stringify(true));
-    //setIsPlaying(true);
-    console.log("Current isPlaying value :", isPlaying );
+ 
 };
   
   return (
@@ -277,20 +260,20 @@ const handlePlayButtonClick = () => {
                 </div>
                 <FontAwesomeIcon id="next" className={classes.music} icon={faStepForward} onClick={handleNextButtonClick}/>
                 <div className={classes.waveContainer}> 
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
-                <div className={classes.wave}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
+                <div className={`${classes.wave} ${isPlaying ? classes.activeWave : ''}`}></div>
                 </div>
             </div>
             <p id="currentTrackName" className={classes.trackTitle}></p>

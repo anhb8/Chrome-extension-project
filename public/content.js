@@ -1,9 +1,7 @@
-console.log("content.js loaded");
-
 const generateSTYLES = () => {
   return `<style>@import url('https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans&display=swap');
   body {
-    background: #33cc99;
+    background: #ffb6c1;
     color: #fff;
     font-family: "Open Sans", sans-serif;
     max-height: 700px;
@@ -230,10 +228,32 @@ const generateSTYLES = () => {
       margin-left: -1000px;
     }
   }
+
+  .quote {
+    margin-top: 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    font-size: 20px;
+    font-style: italic;
+    color: #ffffff; 
+  }
    </style>`;
 };
 
+const getRandomQuote = () => {
+  const quotes = [
+    "Believe you can and you're halfway there. -Theodore Roosevelt",
+    "Don't watch the clock; do what it does. Keep going. -Sam Levenson",
+    "It always seems impossible until it's done. -Nelson Mandela",
+    "Your time is limited, don't waste it living someone else's life. -Steve Jobs",
+    "You are never too old to set another goal or to dream a new dream. -C.S. Lewis",
+  ];
+
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  return quotes[randomIndex];
+};
+
 const generateHTML = (pageName) => {
+  const quote = getRandomQuote();
   return `
    
    <div id="clouds">
@@ -248,27 +268,22 @@ const generateHTML = (pageName) => {
       <div class='_404'>404</div>
       <hr>
       <div class='_1'>GET BACK TO WORK</div>
-      <div class='_2'> > ${pageName}</div>
+      <div class='_2 quote'>${quote}</div>
   </div>
    `;
 };
 
+
+
   
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  console.log('message received - content.js');
   if (message.action === 'enableBlock') {
-    console.log('Before appending script to body');
-    spotify();
-    console.log("Enable block");
     chrome.storage.local.get(['urlWhiteList'], result => {
       const urlWhiteList = result.urlWhiteList || [];
       const currentHostname = window.location.hostname;
       const shortCurrentHostname = currentHostname.replace(/^www\./, '');
-      console.log("URL of the active tab:", currentHostname);
-      console.log("Allowed URL list: ", urlWhiteList);
 
     if (!urlWhiteList.includes(currentHostname) && !urlWhiteList.includes(shortCurrentHostname)) {
-      console.log("Access Denied. Website not in the allowed list.");
       var styleElement = document.createElement('style');
       styleElement.setAttribute('data-dynamic-styles', '');
       document.head.appendChild(styleElement);
@@ -281,10 +296,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   }
 
   if (message.action === 'disableBlock') {
-    console.log("Disable block");
     var styleElement = document.querySelector('[data-dynamic-styles]');
     if (styleElement) {
-      console.log("Removing style");
       styleElement.remove();
     }
   }

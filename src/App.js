@@ -11,17 +11,34 @@ function App() {
   const [blockButtonSticky, setBlockButtonSticky] = useState(false);
  
   useEffect(() => {
-    const blockButtonState = window.localStorage.getItem('MY_EXTENSION_APP');
+    const blockButtonState = window.localStorage.getItem('BLOCK');
     if (blockButtonState !== null) {
       setBlockButtonSticky(JSON.parse(blockButtonState));
-      console.log("The current value of block button is", blockButtonState);
     }
   }, [])
 
   
   useEffect(() => {
-     window.localStorage.setItem('MY_EXTENSION_APP', JSON.stringify(blockButtonSticky))
+     window.localStorage.setItem('BLOCK', JSON.stringify(blockButtonSticky))
   }, [blockButtonSticky])
+
+  useEffect(() => {
+    const focusButtonState = window.localStorage.getItem('FOCUS');
+    const timerState = window.localStorage.getItem('TIMER');
+    if (focusButtonState !== null) {
+      setFocusButtonSticky(JSON.parse(focusButtonState));
+    }
+
+    if (timerState === 'true') {
+      setFocusButtonSticky(true);
+      window.localStorage.setItem('FOCUS', true)
+    }
+  }, [])
+
+  
+  useEffect(() => {
+     window.localStorage.setItem('FOCUS', JSON.stringify(focusButtonSticky))
+  }, [focusButtonSticky])
 
   const powerButtonSticky = false; //power button is never sticky
 
@@ -34,7 +51,6 @@ function App() {
     }
 
     if (identifier === "Block") { //in future version, will set condition to block user from unsticky
-      console.log("Block button is clicked");
       setBlockButtonSticky(!blockButtonSticky);
       chrome.storage.local.set({ blockButtonSticky: !blockButtonSticky });
 
@@ -48,15 +64,11 @@ function App() {
   };
 
   if (blockButtonSticky === true) {
-    console.log("The current value of block button sticky is before sending messeage", blockButtonSticky);
     chrome.runtime.sendMessage({ blockButtonSticky: blockButtonSticky, action: 'activateBlock'});
-    console.log("Send activateBlock message to background script...");
   }
 
   if (blockButtonSticky === false) {
-    console.log("The current value of block button sticky is before sending messeage", blockButtonSticky);
     chrome.runtime.sendMessage({ blockButtonSticky: blockButtonSticky, action: 'deactivateBlock'});
-    console.log("Send deactivateBlock message to background script...");
   }
 
   return (
