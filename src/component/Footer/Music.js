@@ -9,7 +9,7 @@ import { useAsyncError } from "react-router";
 
 const clientId = "617a2f3dd5e74cab8eb565dd84e4bda1";
 const clientSecret = "afe45c28f4c94688bbb934c3e218d604";
-const redirectUri ="chrome-extension://hppoepccpbammgcaggmfffapnpneannj/callback.html";
+const redirectUri ="chrome-extension://bcciggpcoojdgmmimdanmpneconhbahf/callback.html";
 const loggedInState = window.localStorage.getItem('SPOTIFY');
 const isPlayingState = window.localStorage.getItem('PLAYING');
 
