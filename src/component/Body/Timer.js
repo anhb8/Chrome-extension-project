@@ -9,9 +9,9 @@ function Timer () {
     const [count, setCount] = useState(0);
     const [startTime, setStartTime] = useState(null);
     const [reopenTime, setReopenTime] = useState(null);
-    const [timerDuration, setTimerDuration] = useState(45);
+    const [timerDuration, setTimerDuration] = useState(25);
     const [timerStarted, setTimerStarted] = useState(false);
-    const [remainingTime, setRemainingTime] = useState(45 * 60);
+    const [remainingTime, setRemainingTime] = useState(25 * 60);
     const focusButtonState = window.localStorage.getItem('FOCUS');
     const timerState = window.localStorage.getItem('TIMER');
     const timerRef = useRef(null);
@@ -81,7 +81,7 @@ function Timer () {
     }
 
     const storedTimerDuration = localStorage.getItem('timerDuration');
-    setTimerDuration(parseInt(storedTimerDuration, 10) || 45);
+    setTimerDuration(parseInt(storedTimerDuration, 10) || 25);
 
     return () => {
     };
